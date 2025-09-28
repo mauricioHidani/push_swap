@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_clean_element.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/27 23:20:25 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/28 14:51:56 by mhidani          ###   ########.fr       */
+/*   Created: 2025/09/28 14:00:57 by mhidani           #+#    #+#             */
+/*   Updated: 2025/09/28 14:03:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "libft.h"
-# include "dlist.h"
-
-typedef struct s_elm
+void	ft_clean_element(void *ptr)
 {
-	int		index;
-	int		value;
-	int		push_cost;
-	char	is_mediam;
-	char	is_cheapset;
-}	t_elm;
-
-t_dlist	*ft_validate(int argc, char **argv);
-void	ft_clean_element(void *ptr);
-
-#endif
+	if (!ptr)
+		return ;
+	free(ptr);
+}
