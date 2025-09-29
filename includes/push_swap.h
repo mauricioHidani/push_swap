@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 23:20:25 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/29 00:43:12 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/29 01:17:23 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,19 @@ typedef struct s_elm
 	char	is_cheapset;
 }	t_elm;
 
+
+// Utils =======================================================================
+// Checkers --------------------------------------------------------------------
+char	ft_is_ascending(t_dlist *stack);
+// Checkers end Builder --------------------------------------------------------
 t_dlist	*ft_validate(int argc, char **argv);
+// Cleaner ---------------------------------------------------------------------
 void	ft_clean_element(void *ptr);
+
+
+// Sort Algorithm ==============================================================
+void	ft_sort_stacks(t_dlist *stack_a, t_dlist *stack_b);
+
 
 // Operations ==================================================================
 // Push ------------------------------------------------------------------------
@@ -44,6 +55,6 @@ void	ft_rr(t_dlist **stack_a, t_dlist **stack_b);
 void	ft_rra(t_dlist **stack_a);
 void	ft_rrb(t_dlist **stack_b);
 void	ft_rrr(t_dlist **stack_a, t_dlist **stack_b);
-// =============================================================================
+
 
 #endif
