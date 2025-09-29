@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 16:32:48 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/28 15:51:32 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/29 00:49:38 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		ft_putstr_fd("ERROR\n", STDERR_FILENO);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	stack_a = ft_validate(argc, argv);
