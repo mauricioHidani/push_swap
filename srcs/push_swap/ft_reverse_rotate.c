@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rra.c                                           :+:      :+:    :+:   */
+/*   ft_reverse_rotate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 00:30:00 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/29 00:41:16 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/30 15:34:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rra(t_dlist **stack_a)
+void	ft_reverse_rotate(t_dlist **stk, char *dsp)
 {
 	t_dnode	*old_tail;
 
-	if (!stack_a || !(*stack_a)->head || !(*stack_a)->tail)
+	if (!stk || !(*stk)->head || !(*stk)->tail)
 		return ;
-	if ((*stack_a)->head == (*stack_a)->tail)
+	if ((*stk)->head == (*stk)->tail)
 		return ;
-	old_tail = (*stack_a)->tail;
-	(*stack_a)->tail = old_tail->prev;
-	(*stack_a)->tail->next = NULL;
-	(*stack_a)->head->prev = old_tail;
-	old_tail->next = (*stack_a)->head;
-	(*stack_a)->head = old_tail;
+	old_tail = (*stk)->tail;
+	(*stk)->tail = old_tail->prev;
+	(*stk)->tail->next = NULL;
+	(*stk)->head->prev = old_tail;
+	old_tail->next = (*stk)->head;
+	(*stk)->head = old_tail;
+	ft_putstr_fd(dsp, STDOUT_FILENO);
 }
