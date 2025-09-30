@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 16:35:33 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/28 15:43:57 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/30 11:07:56 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,9 @@ static void	ft_push_stack(t_dlist **stack, char *str)
 		ft_clean_dlist(stack, ft_clean_element);
 		return ;
 	}
-	elm->index = -1;
 	elm->push_cost = -1;
+	elm->closest_factor = 0;
 	elm->is_mediam = 0;
-	elm->is_cheapset = 0;
 	elm->value = ft_atoi(str);
 	if (ft_count_digits(elm->value) != ft_strlen(str))
 	{
