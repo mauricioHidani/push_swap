@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pa.c                                            :+:      :+:    :+:   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 16:57:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/29 00:38:09 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/30 15:32:15 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pa(t_dlist **stack_a, t_dlist **stack_b)
+void	ft_push(t_dlist **dst, t_dlist **tgt, char *dsp)
 {
 	t_dnode	*head_b;
 
-	if (!stack_b || !(*stack_b)->head)
+	if (!tgt || !(*tgt)->head)
 		return ;
-	head_b = (*stack_b)->head;
-	(*stack_b)->head = head_b->next;
-	if ((*stack_b)->head)
-		(*stack_b)->head->prev = NULL;
+	head_b = (*tgt)->head;
+	(*tgt)->head = head_b->next;
+	if ((*tgt)->head)
+		(*tgt)->head->prev = NULL;
 	else
-		(*stack_b)->tail = NULL;
-	if ((*stack_a)->head)
+		(*tgt)->tail = NULL;
+	if ((*dst)->head)
 	{
-		head_b->next = (*stack_a)->head;
-		(*stack_a)->head->prev = head_b;
-		(*stack_a)->head = head_b;
+		head_b->next = (*dst)->head;
+		(*dst)->head->prev = head_b;
+		(*dst)->head = head_b;
 	}
 	else
 	{
-		(*stack_a)->head = head_b;
-		(*stack_a)->tail = head_b;
+		(*dst)->head = head_b;
+		(*dst)->tail = head_b;
 		head_b->next = NULL;
 	}
-	(*stack_a)->size++;
-	(*stack_b)->size--;
+	(*dst)->size++;
+	(*tgt)->size--;
+	ft_putstr_fd(dsp, STDOUT_FILENO);
 }
