@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 19:07:30 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/23 14:17:00 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/09/30 16:15:09 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_dlist	*ft_create_dlist(t_dnode *node)
 		return (NULL);
 	list->head = node;
 	list->tail = node;
+	list->size = 0;
 	if (node)
 		list->size = 1;
 	return (list);
