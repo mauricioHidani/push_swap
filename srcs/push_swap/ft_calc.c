@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sfour.c                                         :+:      :+:    :+:   */
+/*   ft_calc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 16:26:25 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 16:28:06 by mhidani          ###   ########.fr       */
+/*   Created: 2025/10/02 11:20:57 by mhidani           #+#    #+#             */
+/*   Updated: 2025/10/02 12:37:20 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sfour(t_dlist **stk_a, t_dlist **stk_b)
+void	ft_calc_cost(t_dlist *stk, t_dnode *tgt)
 {
-	t_dnode	*min;
-	t_dnode
+	t_dnode	*pvt;
+	int		vtgt;
 
-	min = (*stk_a)->head;
-	while ()
+	vtgt = ((t_elm *)tgt->data)->value;
+	pvt = stk->head;
+	while (pvt)
+	{
+		((t_elm *)pvt->data)->is_mediam = ft_is_mediam(stk, tgt);
+		((t_elm *)pvt->data)->rot_cost = ft_rotate_cost(stk, tgt);
+		((t_elm *)pvt->data)->closest_factor = ft_closest_factor(pvt, vtgt);
+		pvt = pvt->next;
+	}
 }

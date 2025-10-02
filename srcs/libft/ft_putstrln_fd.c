@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_ascending.c                                  :+:      :+:    :+:   */
+/*   ft_putstrln_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 00:55:09 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/29 01:24:09 by mhidani          ###   ########.fr       */
+/*   Created: 2025/10/02 16:58:05 by mhidani           #+#    #+#             */
+/*   Updated: 2025/10/02 16:59:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-char	ft_is_ascending(t_dlist *stack)
+void	ft_putstrln_fd(char *str, int fd)
 {
-	t_dnode	*pvt;
+	size_t	i;
 
-	if (!stack || !stack->head || !stack->tail)
-		return (0);
-	pvt = stack->head;
-	while (pvt->next)
+	i = 0;
+	while (str[i])
 	{
-		if (((t_elm *)pvt->data)->value > ((t_elm *)pvt->next->data)->value)
-			return (0);
-		pvt = pvt->next;
+		write(fd, str[i], 1);
+		i++;
 	}
-	return (1);
+	write(fd, "\n", 1);
 }

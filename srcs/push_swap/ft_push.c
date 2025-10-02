@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 16:57:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 15:32:15 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/02 17:00:21 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push(t_dlist **dst, t_dlist **tgt, char *dsp)
+void	ft_push(t_dlist **tgt, t_dlist **dst, char *dsp)
 {
 	t_dnode	*head_b;
 
@@ -38,5 +38,5 @@ void	ft_push(t_dlist **dst, t_dlist **tgt, char *dsp)
 	}
 	(*dst)->size++;
 	(*tgt)->size--;
-	ft_putstr_fd(dsp, STDOUT_FILENO);
+	ft_putstrln_fd(dsp, STDOUT_FILENO);
 }

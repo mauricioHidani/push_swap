@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 00:30:00 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 15:34:50 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/02 17:00:43 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_reverse_rotate(t_dlist **stk, char *dsp)
 	(*stk)->head->prev = old_tail;
 	old_tail->next = (*stk)->head;
 	(*stk)->head = old_tail;
-	ft_putstr_fd(dsp, STDOUT_FILENO);
+	ft_putstrln_fd(dsp, STDOUT_FILENO);
 }

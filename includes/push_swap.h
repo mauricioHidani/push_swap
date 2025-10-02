@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 23:20:25 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 15:54:40 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/02 16:25:09 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct s_elm
 {
 	int		value;
-	int		push_cost;
+	int		rot_cost;
 	int		closest_factor;
 	char	is_mediam;
 }	t_elm;
@@ -27,17 +27,22 @@ typedef struct s_elm
 // Sort Algorithm ==============================================================
 void	ft_stwo(t_dlist **stk);
 void	ft_sthree(t_dlist **stk);
+void	ft_sfive(t_dlist **stk_a, t_dlist **stk_b);
+// Calc Cost -------------------------------------------------------------------
+void	ft_calc_cost(t_dlist *stk, t_dnode *tgt);
+// Utils Calc Cost -------------------------------------------------------------
+char	ft_is_mediam(t_dlist *stk, t_dnode *tgt);
+int		ft_rotate_cost(t_dlist *stk, t_dnode *tgt);
+int		ft_closest_factor(t_dnode *target, int check);
 
 // Utils =======================================================================
-// Checkers --------------------------------------------------------------------
-char	ft_is_ascending(t_dlist *stack);
+// Checkers Order --------------------------------------------------------------
+char	ft_is_ascending(t_dlist *stk);
+char	ft_is_descending(t_dlist *stk);
 // Checkers end Builder --------------------------------------------------------
 t_dlist	*ft_validate(int argc, char **argv);
 // Cleaner ---------------------------------------------------------------------
 void	ft_clean_element(void *ptr);
-
-// Sort Algorithm ==============================================================
-void	ft_sort_stacks(t_dlist *stack_a, t_dlist *stack_b);
 
 // Operations ==================================================================
 // Push ------------------------------------------------------------------------

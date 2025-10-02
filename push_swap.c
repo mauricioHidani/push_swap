@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 16:32:48 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 16:24:28 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:41:49 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ int	main(int argc, char **argv)
 
 	ft_begin_step(argc, argv, &stack_a, &stack_b);
 	// todo: resolve algorithm steps sort stack_a
+	if (ft_is_ascending(stack_a))
+		return (EXIT_FAILURE);
 	if (stack_a->size == 2)
 		ft_stwo(&stack_a);
 	if (stack_a->size == 3)
 		ft_sthree(&stack_a);
-	if (stack_a->size == 4)
-		ft_sfour(&stack_a, &stack_b);
+	if (stack_a->size == 5)
+		ft_sfive(&stack_a, &stack_b);
 	ft_clean_dlist(&stack_a, ft_clean_element);
 	ft_clean_dlist(&stack_b, ft_clean_element);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static void	ft_begin_step(int c, char **v, t_dlist **stk_a, t_dlist **stk_b)
