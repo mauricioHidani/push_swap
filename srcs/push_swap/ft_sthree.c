@@ -6,13 +6,35 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:04:12 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/30 16:05:34 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/03 10:27:47 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static t_dnode	*ft_get_max(t_dlist **stk);
+
 void	ft_sthree(t_dlist **stk)
+{
+	t_dnode	*max;
+
+	max = ft_get_max(stk);
+	if (max == (*stk)->head)
+	{
+		ft_swap(stk, "sa");
+		ft_reverse_rotate(stk, "rra");
+	}
+	else if (max == (*stk)->tail)
+		ft_swap(stk, "sa");
+	else
+	{
+		ft_reverse_rotate(stk, "rra");
+		if (!ft_is_ascending((*stk)))
+			ft_swap(stk, "sa");
+	}
+}
+
+static t_dnode	*ft_get_max(t_dlist **stk)
 {
 	t_dnode	*max;
 	t_dnode	*pivot;
@@ -25,18 +47,5 @@ void	ft_sthree(t_dlist **stk)
 			max = pivot;
 		pivot = pivot->next;
 	}
-	if (max == (*stk)->head)
-	{
-		ft_swap(stk, "sa\n");
-		ft_reverse_rotate(stk, "rra\n");
-	}
-	else if (max == (*stk)->tail)
-		ft_swap(stk, "sa\n");
-	else
-	{
-		ft_reverse_rotate(stk, "rra\n");
-		if (!ft_is_ascending((*stk)))
-			ft_swap(stk, "sa\n");
-	}
+	return (max);
 }
-
