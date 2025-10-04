@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_element.c                                 :+:      :+:    :+:   */
+/*   ft_figure_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 14:00:57 by mhidani           #+#    #+#             */
-/*   Updated: 2025/09/28 14:03:50 by mhidani          ###   ########.fr       */
+/*   Created: 2025/10/03 12:54:06 by mhidani           #+#    #+#             */
+/*   Updated: 2025/10/03 13:52:29 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_clean_element(void *ptr)
+t_figure	*ft_figure(t_dnode *node)
+{
+	return (((t_figure *)node->data));
+}
+
+void	ft_clean_figure(void *ptr)
 {
 	if (!ptr)
 		return ;
