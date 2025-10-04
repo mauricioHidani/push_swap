@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 16:58:05 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/02 16:59:27 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/04 11:58:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putstrln_fd(char *str, int fd)
 	i = 0;
 	while (str[i])
 	{
-		write(fd, str[i], 1);
+		write(fd, &str[i], 1);
 		i++;
 	}
 	write(fd, "\n", 1);
