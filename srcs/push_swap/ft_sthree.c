@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:04:12 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/03 10:27:47 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/04 12:46:46 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_dnode	*ft_get_max(t_dlist **stk)
 	max = (*stk)->head;
 	while (pivot)
 	{
-		if (((t_elm *)max->data)->value < ((t_elm *)pivot->data)->value)
+		if (ft_figure(max)->value < ft_figure(pivot)->value)
 			max = pivot;
 		pivot = pivot->next;
 	}
