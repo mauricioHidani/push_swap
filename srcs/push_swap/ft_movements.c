@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 08:49:43 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/03 08:52:23 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/04 12:19:41 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	ft_swap(t_dlist **stk, char *dsp)
 	next_old_head->next = old_head;
 	(*stk)->head = next_old_head;
 	old_head->prev = next_old_head;
-	ft_putstr_fd(dsp, STDOUT_FILENO);
+	ft_putstrln_fd(dsp, STDOUT_FILENO);
 }
