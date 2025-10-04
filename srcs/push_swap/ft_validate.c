@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 16:35:33 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/02 11:58:05 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/03 15:49:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ static size_t	ft_count_digits(int nbr)
 
 static void	ft_push_stack(t_dlist **stack, char *str)
 {
-	t_elm	*elm;
+	t_figure	*elm;
 
-	elm = malloc(sizeof(t_elm));
+	elm = malloc(sizeof(t_figure));
 	if (!elm)
 	{
-		ft_clean_dlist(stack, ft_clean_element);
+		ft_clean_dlist(stack, ft_clean_figure);
 		return ;
 	}
-	elm->rot_cost = -1;
+	elm->top_cost = -1;
 	elm->closest_factor = 0;
 	elm->is_mediam = 0;
 	elm->value = ft_atoi(str);
 	if (ft_count_digits(elm->value) != ft_strlen(str))
 	{
-		ft_clean_dlist(stack, ft_clean_element);
+		ft_clean_dlist(stack, ft_clean_figure);
 		return ;
 	}
 	ft_push_lst_dlist(*stack, elm);
@@ -109,20 +109,20 @@ static void	ft_push_stack(t_dlist **stack, char *str)
 
 static void	ft_check_equals(t_dlist **stack)
 {
-	t_dnode	*pvt;
-	t_dnode	*ax;
+	t_dnode	*pivot;
+	t_dnode	*aux;
 
-	pvt = (*stack)->head;
-	while (pvt)
+	pivot = (*stack)->head;
+	while (pivot)
 	{
-		ax = pvt->next;
-		while (ax && ((t_elm *)ax->data)->value != ((t_elm *)pvt->data)->value)
-			ax = ax->next;
-		if (ax && ((t_elm *)ax->data)->value == ((t_elm *)pvt->data)->value)
+		aux = pivot->next;
+		while (aux && ft_figure(aux)->value != ft_figure(pivot)->value)
+			aux = aux->next;
+		if (aux && ft_figure(aux)->value == ft_figure(pivot)->value)
 		{
-			ft_clean_dlist(stack, ft_clean_element);
+			ft_clean_dlist(stack, ft_clean_figure);
 			return ;
 		}
-		pvt = pvt->next;
+		pivot = pivot->next;
 	}
 }
