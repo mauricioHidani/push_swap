@@ -6,75 +6,82 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:40:32 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/02 17:00:39 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/04 12:34:10 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_dnode	*ft_get_min(t_dlist *stk, t_dnode *exc);
+static t_dnode	*ft_find_min(t_dlist *stk, t_dnode *exc);
 static void		ft_handle_mins(t_dlist **stk_a, t_dlist **stk_b);
-static void		ft_move_rot(t_dlist **stk, t_dnode *tgt);
+static void		ft_handle_move(t_dlist **stk_a, t_dnode *tgt);
 
 void	ft_sfive(t_dlist **stk_a, t_dlist **stk_b)
 {
 	ft_handle_mins(stk_a, stk_b);
-	if (!ft_is_ascending(*stk_a))
+	if (ft_is_ascending(*stk_a) == FALSE)
 		ft_sthree(stk_a);
-	if (!ft_is_descending(*stk_b))
-		ft_swap(stk_b, "sb\n");
-	ft_push(stk_b, stk_a, "pa\n");
-	ft_push(stk_b, stk_a, "pa\n");
+	if (ft_is_descending(*stk_b) == FALSE)
+		ft_swap(stk_b, "sb");
+	ft_push(stk_b, stk_a, "pa");
+	ft_push(stk_b, stk_a, "pa");
+	if (ft_is_ascending(*stk_a) == FALSE)
+		ft_putstrln_fd("Error", STDOUT_FILENO);
 }
 
-static t_dnode	*ft_get_min(t_dlist *stk)
+static t_dnode	*ft_find_min(t_dlist *stk, t_dnode *exc)
 {
-	int		crr_v;
-	int		tgt_v;
 	t_dnode	*min;
-	t_dnode	*pvt;
+	t_dnode	*pivot;
 
 	min = stk->head;
-	pvt = stk->head->next;
-	while (pvt)
+	while (exc && min && min == exc)
+		min = min->next;
+	pivot = stk->head->next;
+	while (pivot)
 	{
-		crr_v = ((t_elm *)min->data)->value;
-		tgt_v = ((t_elm *)pvt->data)->value;
-		if (crr_v > tgt_v)
-			min = pvt;
-		pvt = pvt->next;
+		if (pivot != exc && ft_figure(pivot)->value < ft_figure(min)->value)
+			min = pivot;
+		pivot = pivot->next;
 	}
 	return (min);
 }
 
 static void	ft_handle_mins(t_dlist **stk_a, t_dlist **stk_b)
 {
-	int		i;
-	t_dnode	*min;
+	t_dnode	*min_a;
+	t_dnode	*min_b;
+	t_dnode	*aux;
 
-	i = 0;
-	min = ft_get_min(stk_a);
-	while (i < 2)
+	min_a = ft_find_min(*stk_a, NULL);
+	min_b = ft_find_min(*stk_a, min_a);
+	ft_build_cost(*stk_a, NULL);
+	if (ft_figure(min_a)->top_cost > ft_figure(min_b)->top_cost)
 	{
-		if (min == (*stk_a)->head)
-			ft_push(stk_a, stk_b, "pb");
-		i++;
+		aux = min_a;
+		min_a = min_b;
+		min_b = aux;
 	}
+	ft_handle_move(stk_a, min_a);
+	ft_push(stk_a, stk_b, "pb");
+	ft_build_cost(*stk_a, NULL);
+	ft_handle_move(stk_a, min_b);
+	ft_push(stk_a, stk_b, "pb");
 }
 
-static void	ft_move_rot(t_dlist **stk, t_dnode *tgt)
+static void	ft_handle_move(t_dlist **stk_a, t_dnode *tgt)
 {
-	int	count;
+	int	operations;
 
-	count = 0;
-	((t_elm *)tgt->data)->rot_cost = ft_rotate_cost(*stk, tgt);
-	((t_elm *)tgt->data)->is_mediam = ft_is_mediam(*stk, tgt);
-	while (count < ((t_elm *)tgt->data)->rot_cost)
+	if (!*stk_a || !tgt)
+		return ;
+	operations = 1;
+	while (operations < ft_figure(tgt)->top_cost)
 	{
-		if (((t_elm *)tgt->data)->is_mediam)
-			ft_rotate(stk, "ra");
+		if (ft_figure(tgt)->is_mediam)
+			ft_rotate(stk_a, "ra");
 		else
-			ft_reverse_rotate(stk, "rra");
-		count++;
+			ft_reverse_rotate(stk_a, "rra");
+		operations++;
 	}
 }
