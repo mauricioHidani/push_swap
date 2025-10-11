@@ -6,14 +6,15 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/27 18:59:53 by mhidani           #+#    #+#              #
-#    Updated: 2025/10/08 14:10:15 by mhidani          ###   ########.fr        #
+#    Updated: 2025/10/11 10:20:52 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= push_swap
+NAME		= $(BIN_DIR)push_swap
 LOCAL		= 42 São Paulo
 VERSION		= 1.0.0v
 JOIN		= github.com/mauricioHidani
+CHECKER		= $(BIN_DIR)checker
 
 CC			= cc
 CFLAGS		= -g -Wall -Wextra -Werror
@@ -25,6 +26,7 @@ SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 INCS_DIR	= includes/
 LIBS_DIR	= libs/
+BIN_DIR		= bin/
 
 # Presentation Settings --------------------------------------------------------
 RESET		:= \033[0m
@@ -48,9 +50,12 @@ DL_OBJS_DIR = $(OBJS_DIR)dlist/
 DL_SRCS		= \
 			$(DL_SRCS_DIR)ft_clean_dlist.c $(DL_SRCS_DIR)ft_create_dlist.c \
 			$(DL_SRCS_DIR)ft_create_dnoce.c $(DL_SRCS_DIR)ft_create_dnode.c \
-			$(DL_SRCS_DIR)ft_indexof_dlist.c $(DL_SRCS_DIR)ft_push_beg_dlist.c \
-			$(DL_SRCS_DIR)ft_push_lst_dlist.c $(DL_SRCS_DIR)ft_push_next_dlist.c \
-			$(DL_SRCS_DIR)ft_push_prev_dlist.c $(DL_SRCS_DIR)ft_remove_beg_dnode.c \
+			$(DL_SRCS_DIR)ft_indexof_dlist.c \
+			$(DL_SRCS_DIR)ft_push_beg_dlist.c \
+			$(DL_SRCS_DIR)ft_push_lst_dlist.c \
+			$(DL_SRCS_DIR)ft_push_next_dlist.c \
+			$(DL_SRCS_DIR)ft_push_prev_dlist.c \
+			$(DL_SRCS_DIR)ft_remove_beg_dnode.c \
 			$(DL_SRCS_DIR)ft_remove_dnode.c $(DL_SRCS_DIR)ft_remove_lst_dnode.c
 DL_OBJS		= $(patsubst $(DL_SRCS_DIR)%.c, $(DL_OBJS_DIR)%.o, $(DL_SRCS))
 
@@ -74,7 +79,8 @@ LB_SRCS		= \
 			$(LB_SRCS_DIR)ft_memset.c $(LB_SRCS_DIR)ft_putchar_fd.c \
 			$(LB_SRCS_DIR)ft_putendl_fd.c $(LB_SRCS_DIR)ft_putnbr_fd.c \
 			$(LB_SRCS_DIR)ft_putstr_fd.c $(LB_SRCS_DIR)ft_putstrln_fd.c \
-			$(LB_SRCS_DIR)ft_split.c $(LB_SRCS_DIR)ft_split_respecting_target.c \
+			$(LB_SRCS_DIR)ft_split.c \
+			$(LB_SRCS_DIR)ft_split_respecting_target.c \
 			$(LB_SRCS_DIR)ft_strchr.c $(LB_SRCS_DIR)ft_strdup.c \
 			$(LB_SRCS_DIR)ft_striteri.c $(LB_SRCS_DIR)ft_strjoin.c \
 			$(LB_SRCS_DIR)ft_strlcat.c $(LB_SRCS_DIR)ft_strlcpy.c \
@@ -110,96 +116,77 @@ CK_MN_OBJ	= $(PS_OBJS_DIR)checker.o
 # Base =========================================================================
 all: push_swap_banner $(NAME)
 
-$(NAME): $(LB_SLIB) $(DL_SLIB) $(PS_SLIB) $(MAIN_OBJ) | $(LIBS_DIR)
-	@echo ""
-	@echo "🦎 $(C03)Generate Push Swap$(RESET)"
-	$(CC) $(CFLAGS) -I$(INCS_DIR) $(MAIN_OBJ) $(PS_SLIB) $(DL_SLIB) $(LB_SLIB) \
-	-o $@
+$(NAME): $(LB_SLIB) $(DL_SLIB) $(PS_SLIB) $(MAIN_OBJ) | $(LIBS_DIR) $(BIN_DIR)
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) $(MAIN_OBJ) $(PS_SLIB) $(DL_SLIB) \
+	$(LB_SLIB) -o $@
+	@echo "🦎 $(C03)Compile Push Swap$(RESET)"
 
 $(LIBS_DIR):
-	@echo ""
-	@echo -n "$(C10)Libraries Directory$(RESET) "
-	mkdir -p $@
+	@mkdir -p $@
+
+$(BIN_DIR):
+	@mkdir -p $@
 
 # Dubly-Linked List ============================================================
 $(DL_SLIB): $(DL_OBJS) | $(LIBS_DIR)
-	@echo ""
-	@echo "📥 $(C04)STATIC-LIB DLIST$(RESET)"
-	$(AR) $(ARFLAGS) $@ $^
-	@echo "📦 $(C10)$(ITALIC)Finish Static-Lib DList$(RESET)"
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C04)Generate static lib Doubly-List$(RESET)"
 
 $(DL_OBJS_DIR)%.o: $(DL_SRCS_DIR)%.c | $(DL_OBJS_DIR)
-	@echo -n "$(C03)DList$(RESET) "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 $(DL_OBJS_DIR):
-	@echo ""
-	@echo -n "$(C03)DList$(RESET) "
-	mkdir -p $@
+	@mkdir -p $@
 
 # Libft ========================================================================
 $(LB_SLIB): $(LB_OBJS) | $(LIBS_DIR)
-	@echo ""
-	@echo "📥 $(C04)STATIC-LIB LIBFT$(RESET)"
-	$(AR) $(ARFLAGS) $@ $^
-	@echo "📦 $(C10)$(ITALIC)Finish Static-Lib Libft$(RESET)"
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C04)Generate static lib Libft$(RESET)"
 
 $(LB_OBJS_DIR)%.o: $(LB_SRCS_DIR)%.c | $(LB_OBJS_DIR)
-	@echo -n "$(C03)Libft$(RESET) "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 $(LB_OBJS_DIR):
-	@echo ""
-	@echo -n "$(C03)Libft$(RESET) "
-	mkdir -p $@
+	@mkdir -p $@
 
 # Push Swap ====================================================================
 $(PS_SLIB): $(PS_OBJS)
-	@echo ""
-	@echo "📥 $(C04)STATIC-LIB PUSH SWAP$(RESET)"
-	$(AR) $(ARFLAGS) $@ $^
-	@echo "📦 $(C10)$(ITALIC)Finish Static-Lib PushSwap$(RESET)"
+	@$(AR) $(ARFLAGS) $@ $^
+	@echo "📥 $(C04)Generate static lib Push-Swap$(RESET)"
 
 $(PS_OBJS_DIR)%.o: $(PS_SRCS_DIR)%.c | $(PS_OBJS_DIR)
-	@echo -n "$(C03)PushSwap$(RESET) "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 $(MAIN_OBJ): $(MAIN_SRC)
-	@echo ""
-	@echo -n "$(C03)PushSwap Main Function$(RESET) "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 $(PS_OBJS_DIR):
-	@echo ""
-	@echo -n "$(C03)PushSwap$(RESET) "
-	mkdir -p $@
+	@mkdir -p $@
 
 # Checker ======================================================================
 bonus: $(LB_SLIB) $(DL_SLIB) $(PS_SLIB) $(CK_MN_OBJ)
-	@echo ""
-	@echo "🦎 $(C03)Generate Checker Push Swap$(RESET)"
-	$(CC) $(CFLAGS) -I$(INCS_DIR) $(CK_MN_OBJ) $(PS_SLIB) $(DL_SLIB) $(LB_SLIB) \
-	-o checker
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) $(CK_MN_OBJ) $(PS_SLIB) $(DL_SLIB) $(LB_SLIB) \
+	-o $(CHECKER)
+	@echo "🦎 $(C03)Compile Checker Push-Swap$(RESET)"
 
 $(CK_MN_OBJ): $(CK_MN_SRC)
-	@echo -n "$(C03)Checker$(RESET) "
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
 
 # Utils ========================================================================
 clean:
 	@echo "🧹 $(C02)$(ITALIC)Clean$(RESET)"
-	rm -rf $(DL_OBJS_DIR)
-	rm -rf $(LB_OBJS_DIR)
-	rm -rf $(PS_OBJS_DIR)
-	rm -rf $(OBJS_DIR)
-	rm -f $(DL_SLIB)
-	rm -f $(LB_SLIB)
-	rm -f $(PS_SLIB)
-	rm -rf $(LIBS_DIR)
+	@rm -rf $(DL_OBJS_DIR)
+	@rm -rf $(LB_OBJS_DIR)
+	@rm -rf $(PS_OBJS_DIR)
+	@rm -rf $(OBJS_DIR)
+	@rm -f $(DL_SLIB)
+	@rm -f $(LB_SLIB)
+	@rm -f $(PS_SLIB)
+	@rm -rf $(LIBS_DIR)
 
-fclean: clean 
-	rm -f $(NAME)
-	rm -f checker
+fclean: clean
+	@echo "🧹 $(C02)$(ITALIC)Full Clean$(RESET)"
+	@rm -rf $(BIN_DIR)
 
 re: fclean all
 	
