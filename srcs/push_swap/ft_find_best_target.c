@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:10:48 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/06 14:10:50 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/10/11 10:02:25 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_dnode	*ft_find_target_in_a(t_dlist *stk_a, int value_b);
 static size_t	ft_find_crr_cost(t_dnode *tgt, t_dnode *pvt_b);
+static t_bool	ft_is_mediam(t_dnode *node_a, t_dnode *node_b);
 
 void	ft_find_best_target(t_dlist *stk_a, t_dlist *stk_b, t_target **tgt)
 {
@@ -73,8 +74,8 @@ static size_t	ft_find_crr_cost(t_dnode *tgt, t_dnode *pvt_b)
 
 	cost_a = ft_figure(tgt)->cost;
 	cost_b = ft_figure(pvt_b)->cost;
-	both_above = ft_figure(tgt)->is_mediam && ft_figure(pvt_b)->is_mediam;
-	both_below = !ft_figure(tgt)->is_mediam && !ft_figure(pvt_b)->is_mediam;
+	both_above = ft_is_mediam(tgt, pvt_b);
+	both_below = !ft_is_mediam(tgt, pvt_b);
 	if (both_above || both_below)
 	{
 		if (cost_a > cost_b)
@@ -84,4 +85,14 @@ static size_t	ft_find_crr_cost(t_dnode *tgt, t_dnode *pvt_b)
 	}
 	else
 		return (cost_a + cost_b);
+}
+
+static t_bool	ft_is_mediam(t_dnode *node_a, t_dnode *node_b)
+{
+	t_bool	mediam_a;
+	t_bool	mediam_b;
+
+	mediam_a = ft_figure(node_a)->is_mediam;
+	mediam_b = ft_figure(node_b)->is_mediam;
+	return (mediam_a && mediam_b);
 }
