@@ -1,5 +1,5 @@
 # PUSH SWAP
-🚩 (42 São Paulo)(https://www.42sp.org.br/) \
+🚩 (42 São Paulo)(https://www.42sp.org.br/)
 
 O projeto Push Swap tem como objetivo desenvolver um algoritmo capaz de ordenar 
 uma pilha de números inteiros utilizando um conjunto limitado de operações 
